@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Offer;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class OfferFixtures extends BaseFixture
@@ -43,14 +44,10 @@ class OfferFixtures extends BaseFixture
     ];
 
 
-    private static $articleAuthors = [
-        'Mike Ferengi',
-        'Amy Oort',
-    ];
-
     public function loadData(ObjectManager $manager)
     {
-        $this->createMany(Offer::class, 10, function(Offer $offer, $count) {
+        $this->createMany(10, 'main_offres', function($count) use ($manager) {
+            $offer = new Offer();
             $offer->setDepartureCity($this->faker->randomElement(self::$city))
                 ->setArrivalCity($this->faker->randomElement(self::$city))
                 ->setDepartureSpot($this->faker->randomElement(self::$spot))
@@ -68,8 +65,17 @@ class OfferFixtures extends BaseFixture
                 ->setCreatedAt($this->faker->dateTime('now'))
                 //->setPublishedAt($this->faker->dateTimeBetween('now', '+1 day'))
             ;
+
+            return $offer;
         });
 
         $manager->flush();
     }
+
+//    public function getDependencies()
+//    {
+//        return [
+//            UserFixture::class
+//        ];
+//    }
 }

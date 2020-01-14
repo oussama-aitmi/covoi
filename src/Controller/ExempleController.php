@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 
-class ArticleController extends AbstractController
+class ExempleController extends AbstractController
 {
 
 //    private $isDebug;
