@@ -53,7 +53,7 @@ class OfferFixtures extends BaseFixture
                 ->setDepartureSpot($this->faker->randomElement(self::$spot))
                 ->setArrivalSpot($this->faker->randomElement(self::$spot))
                 ->setDepartureDateFlexible($this->faker->boolean(25))
-                ->setDepartureDate($this->faker->dateTimeBetween('now', '+60 days'))
+                ->setDepartureDate($this->faker->dateTimeBetween('now', '+90 days'))
                 ->setPrice($this->faker->numberBetween(50, 500))
                 ->setSeatCount($this->faker->numberBetween(1, 6))
                 ->setLuggage($this->faker->numberBetween(1, 4))

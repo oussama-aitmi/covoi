@@ -1,0 +1,29 @@
+{% set classCurrentUrl = 'current-menu-item current_page_item' %}
+
+{#{{ app.request.pathInfo }}#}
+{#{{ app.user.username }}#}
+
+
+<div class="navigation-wrap">
+    <ul class="navigation list-inline list-unstyled">
+        <li class="menu-item"><a title="Home" href="{{ site_url }}">Accueil</a></li>
+        <li class="menu-item {{ app.request.pathInfo ==  "/teste" ? classCurrentUrl }}"><a title="Nos Trajets" href="{{ site_url }}/covoiturage">Nos trajets</a></li>
+        <li class="menu-item menu-item-has-children dropdown"><a title="Covoiturage" href="#" data-toggle="dropdown" class="dropdown-toggle" data-hover="dropdown" aria-haspopup="true">Aide <i class="aficon-angle-down"></i></a>
+            <ul role="menu" class=" dropdown-menu">
+                <li class="menu-item {{ app.request.pathInfo ==  '/comment-ca-marche' ? classCurrentUrl }}"><a title="Comment ça marche" href="{{ site_url }}/comment-ca-marche/">Comment ça marche</a></li>
+                <li class="menu-item {{ app.request.pathInfo ==  '/pourquoi-covoiturage' ? classCurrentUrl }}"><a title="Pourquoi le covoiturage" href="{{ site_url }}/pourquoi-covoiturage/">Pourquoi covoiturage</a></li>
+                <li class="menu-item {{ app.request.pathInfo ==  '/conditions-generales-utilisation' ? classCurrentUrl }}"><a title="Règles" href="{{ site_url }}/conditions-generales-utilisation/">Conditions générales d’tilisation</a></li>
+            </ul>
+        </li>
+        <li class="menu-item {{ app.request.pathInfo ==  '/contact' ? classCurrentUrl }}"><a title="Contact" href="{{ site_url }}/contact/">Contact</a></li>
+        <li class="send-offre special-nav">
+            {% if app.user.username is defined %}
+            <a href="{{ site_url }}profile?screen=new" class="submit-btn"><i class="sl-location-pin"></i><span>Proposer un trajet</span></a>
+            {% endif %}
+        </li>
+    </ul>
+</div>
+
+{% if app.request.pathInfo ==  "/teste" %}
+    <a id="search-mobile" href="#" data-toggle="modal" data-target="#search-form-modal"><i class="sl-magnifier-add" ></i></a>
+{% endif %}

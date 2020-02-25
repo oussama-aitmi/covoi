@@ -299,4 +299,31 @@ class Offer
 
         return $this;
     }
+
+    /**
+     * Get FormatedOffreDate
+     *
+     * @return \DateTime | string
+     */
+    public function getFormatedOffreDate()
+    {
+        if($this->departure_date instanceof \DateTime){
+            return $this->departure_date->format('Y-m-d') == \date('Y-m-d') ? 'Aujourd\'hui' : date("l d F à H:i");
+        }
+    }
+
+    /*
+     * Get VihiculeType
+     *
+     * @return Null | string
+     */
+    public function getVihiculeType()
+    {
+        $car = $this->car_type;
+
+        if(empty($car) && !empty($this->car_color)){
+            $car = 'Voiture ';
+        }
+        return $car . ' ' . $this->car_color;
+    }
 }

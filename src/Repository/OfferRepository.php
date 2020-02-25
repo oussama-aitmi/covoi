@@ -19,7 +19,19 @@ class OfferRepository extends ServiceEntityRepository
         parent::__construct($registry, Offer::class);
     }
 
-    public function exampleFindAllOfferByNewest($value, $maxResults = 10)
+    /*
+     * @return Offer[]
+     */
+    public function getLatestOffer($maxResults = 10) : array
+    {
+        return $this->createQueryBuilder('o')
+            ->setMaxResults($maxResults)
+            //->andWhere('o.departure_city IS NULL OR o.departure_date > NOW()')
+            ->getQuery()
+            ->getResult();
+    }
+
+/*    public function getLatestOffer($value, $maxResults = 10)
     {
         return $this->createQueryBuilder('o')
                 ->andWhere('o.departure_city = :val')
@@ -29,7 +41,16 @@ class OfferRepository extends ServiceEntityRepository
                 ->andWhere('o.departure_city IS NULL OR o.departure_date > NOW()')
                 ->getQuery()
                 ->getResult();
+    }*/
+
+    /*
+     * @return Offer[]
+     */
+    public function findSearch():array
+    {
+        return $this->findAll();
     }
+
 
 
     // /**

@@ -1,0 +1,55 @@
+<div class="af-item-wrap">
+    <a class="wrap-link" href="{{offer.slug}}" title="{{offer.departureCity}}">
+        <div class="white-block hover-shadow advert-item">
+            <div class="flex-wrap flex-start-h">
+                <div class="flex-left">
+                    <div class="white-block-content">
+                        <div class=" date"><time datetime="{{ offer.departureDate | date('Y-m-d') }}">{{ offer.getFormatedOffreDate}} à <span>{{ offer.departureDate | date('H:i') }}</span>h</time></div>
+
+                        <div class="locations">
+                            <div class="flex-wrap itinerary-from">
+                                <div class="flex-left"><i title="sl-flag" class="sl-flag"></i></div>
+                                <div class="flex-right">
+                                    <h5>{{offer.departureCity}}</h5>
+                                    <h6>{{ offer.departureSpot|length > 60 and app.request.pathInfo ==  '/' ? offer.departureSpot[:60]~"..." : offer.departureSpot}}</h6>
+                                </div>
+                            </div>
+                            <div class="flex-wrap">
+                                <div class="flex-left"><i title="sl-location-pin" class="sl-location-pin"></i></div>
+                                <div class="flex-right">
+                                    <h5>{{offer.arrivalCity}}</h5>
+                                    <h6>{{ offer.arrivalCity|length > 60 and app.request.pathInfo ==  '/' ? offer.arrivalCity[:60]~"..." : offer.arrivalCity}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%  if not app.request.pathInfo ==  '/' %}
+                <div class="flex-last">
+                    <div class="price">{{offer.price ? 'Non définie' : offer.price|number_format ~ '<span> Dh</span>' }}</div>
+                    <div class="seat"><b>{{ offer.seatCount }}</b> {{ offer.seatCount > 1 ? 'places' : 'place' }} {{ app.request.pathInfo !=  '/' ? 'disponible' }}</div>
+                </div>
+                {% endif%}
+            </div>
+
+            <div class="advert-sm-details">
+                <div>
+                    {% if offer.price %}
+                    <div class="price">{{ offer.price|number_format(2, '.', ',') }}<span> Dh</span></div>
+                    {% elseif offer.is_free == 1 %}
+                    <div class="price">0.00 <span> Dh</span></div>
+                    {% endif %}
+                    <div class="seat"><b>{{ offer.seatCount }}</b> {{ offer.seatCount > 1 ? 'places' : 'place' }} {{ app.request.pathInfo !=  '/' ? 'disponible' }}</div>
+                </div>
+                <div>
+                    <div class="author">
+                        <div class="author-img"><?php echo getUserAvatarUrl($post->avatar, $post->first_name) ?></div>
+                        <div class="author-name"><?php echo $post->first_name ?></div>
+                    </div>
+                    <div class="advert-car-type">{{ offer.getVihiculeType }}</div>
+                </div>
+            </div>
+
+        </div>
+    </a>
+</div>

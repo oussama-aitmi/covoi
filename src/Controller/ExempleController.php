@@ -24,7 +24,7 @@ class ExempleController extends AbstractController
 //    }
 
     /**
-     * @Route("/", name="home-page", methods={"GET"})
+     * @Route("/sss", name="home-page", methods={"GET"})
      */
     public function homepage()
     {
@@ -57,7 +57,7 @@ EOF;
         return $this->render('article/show.html.twig', [
                 'title' => ucwords(str_replace('-', ' ', $slug)),
                 'articleContent' =>  $articleContent,
-                'comments'=>$comments,
+                'comments'=>$comments
             ]);
     }
 

@@ -1,0 +1,32 @@
+<section class="kc-elm kc-css-783597 kc_row">
+    <div class="kc-row-container  kc-container">
+        <div class="kc-wrap-columns">
+            <div class="kc-elm kc-css-180427 kc_col-sm-12 kc_column kc_col-sm-12">
+                <div class="kc-col-container">
+                    <div class="af-title text-center">
+                        <h2 class="af-heading">Prochains trajets</h2>
+                    </div>
+                    <div data-tab-active="1" class="kc_tabs group">
+                        <div class="kc_wrapper kc_clearfix">
+                            <div id="closing-soon" class="kc-elm kc-css-945350 kc_tab ui-tabs-panel kc_ui-tabs-hide kc_clearfix">
+                                <div class="kc_tab_content">
+                                    <div id="adverts-list" class="adverts-list clearfix" >
+                                        {% for offer in offers %}
+                                            {% include 'home/offer_detail.html.twig' with {offer:offer} only %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="all-trajects kc_clearfix">
+                                <a class="af-button" href="{{ site_url }}/covoiturage/">Voire tous les trajets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
