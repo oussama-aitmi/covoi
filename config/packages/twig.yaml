@@ -3,3 +3,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     exception_controller: null
+    globals:
+        ga_tracking: 'UA-xxxxx-x'
+        site_url: 'http://localhost:8000'
