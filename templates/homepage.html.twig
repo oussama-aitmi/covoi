@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page !{% endblock %}
+
+{% block body %}
+
+    <main class="clearfix">
+        <div class="kc_clfw"></div>
+        {% include 'home/search_bloc.html.twig'  %}
+        {% include 'home/offers_list.html.twig' with {offers:offers} only %}
+        {% include 'home/how_to_block.html.twig'  %}
+        {% include 'home/devices_bloc.html.twig'  %}
+        {% include 'footer.html.twig'  %}
+    </main>
+
+
+{% endblock %}

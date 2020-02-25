@@ -4,13 +4,63 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/datetimepicker.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/autocomplete.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/magnific-popup.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/author.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+            <link rel="stylesheet" id="kc-general-css" href="http://covoi.test/wp-content/plugins/kingcomposer/assets/frontend/css/kingcomposer.min.css?ver=2.7.6" type="text/css" media="all">
         {% endblock %}
     </head>
-    <body>
-        <h1><a href="{{ "home-page" }}">Home Page</a></h1>
+
+    <body class="home page-template page-template-page-tpl_home page-template-page-tpl_home-php page page-id-10 kingcomposer kc-css-system">
+
+    {% if app.request.pathInfo ==  "/" %}
+    <header class="header-2 header-3 sticky-header">
+        <div class="container">
+            <div class="flex-wrap">
+                {% include 'headers/logo.html.twig' %}
+                {% include 'headers/header.html.twig' %}
+                {% include 'headers/bar-right.html.twig' %}
+            </div>
+        </div>
+    </header>
+    {% else %}
+    <header class="header-1">
+        <div class="container">
+            <div class="flex-wrap">
+                {% include 'headers/logo.html.twig' %}
+                {% include 'headers/header.html.twig' %}
+                {% include 'headers/bar-right.html.twig' %}
+            </div>
+        </div>
+    </header>
+    {% endif %}
+
+
+
+        {#<h1><a href="{{ "home-page" }}">Covoiturage Home Page</a></h1>#}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+            {#<script src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>#}
+
+            <script src="{{ asset('js/autocomplete.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+            <script src="{{ asset('js/custom.js') }}"></script>
+            <script src="{{ asset('js/profile.js') }}"></script>
+            <script src="{{ asset('js/reviews.js') }}"></script>
+            <script src="{{ asset('js/messages.js') }}"></script>
+        {% endblock %}
+
+
+
     </body>
+
+
 </html>
