@@ -3,10 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Offer;
+use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class OfferFixtures extends BaseFixture
+class OfferFixtures extends BaseFixture implements DependentFixtureInterface
 {
 
     private static $city = [
@@ -63,7 +64,7 @@ class OfferFixtures extends BaseFixture
                 ->setSmokingAllowed($this->faker->boolean(25))
 
                 ->setCreatedAt($this->faker->dateTime('now'))
-                //->setPublishedAt($this->faker->dateTimeBetween('now', '+1 day'))
+                ->setUser($this->getRandomReference('main_users'))
             ;
 
             return $offer;
@@ -72,10 +73,10 @@ class OfferFixtures extends BaseFixture
         $manager->flush();
     }
 
-//    public function getDependencies()
-//    {
-//        return [
-//            UserFixture::class
-//        ];
-//    }
+    public function getDependencies()
+    {
+        return [
+            UserFixture::class
+        ];
+    }
 }
