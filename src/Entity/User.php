@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -58,6 +60,16 @@ class User implements UserInterface
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="user")
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -169,6 +181,42 @@ class User implements UserInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFullName()
+    {
+        return "{$this->getFirstname()} {$this->getLastname()}";
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getUser() === $this) {
+                $offer->setUser(null);
+            }
+        }
 
         return $this;
     }

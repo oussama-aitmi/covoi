@@ -4,14 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\Timestampable;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
  */
 class Offer
 {
-    use Timestampable;
+    use TimestampableEntity;
 
 
     /**
@@ -101,6 +101,12 @@ class Offer
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
 
     public function getId(): ?int
@@ -325,5 +331,17 @@ class Offer
             $car = 'Voiture ';
         }
         return $car . ' ' . $this->car_color;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
